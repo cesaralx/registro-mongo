@@ -8,13 +8,14 @@ app.use(bodyParser.json());
 
 Genre =require('./models/genre');
 Book =require('./models/book');
+Expositor = require('./models/expositores');
 
 // Connect to Mongoose
-mongoose.connect('mongodb://localhost/bookstore');
+mongoose.connect('mongodb://localhost/Registro');
 var db = mongoose.connection;
 
 app.get('/', (req, res) => {
-	res.send('Please use /api/books or /api/genres');
+	res.send('Please use /api/books or /api/genres or /api/expositores');
 });
 
 app.get('/api/genres', (req, res) => {
@@ -103,6 +104,56 @@ app.delete('/api/books/:_id', (req, res) => {
 			throw err;
 		}
 		res.json(book);
+	});
+});
+
+// Gets y post para expositores
+app.get('/api/expositores', (req, res) => {
+	Expositor.getExpositores((err, expositores) => {
+		if(err){
+			throw err;
+		}
+		res.json(expositores);
+	});
+});
+
+app.get('/api/expositores/:_id', (req, res) => {
+	Expositor.getExpositorById(req.params._id, (err, expositor) => {
+		if(err){
+			throw err;
+		}
+		res.json(expositor);
+	});
+});
+
+app.post('/api/expositores', (req, res) => {
+	var expositor = req.body;
+	Expositor.addExpositor(expositor, (err, expositor) => {
+		if(err){
+			throw err;
+		}
+		res.json(expositor);
+	});
+});
+
+app.put('/api/expositores/:_id', (req, res) => {
+	var id = req.params._id;
+	var expositor = req.body;
+	Expositor.updateExpositor(id, expositor, {}, (err, expositor) => {
+		if(err){
+			throw err;
+		}
+		res.json(expositor);
+	});
+});
+
+app.delete('/api/expositores/:_id', (req, res) => {
+	var id = req.params._id;
+	Expositor.removeExpositor(id, (err, expositor) => {
+		if(err){
+			throw err;
+		}
+		res.json(expositor);
 	});
 });
 

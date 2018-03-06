@@ -1,0 +1,28 @@
+<a href="#/expositores">Go Back</a>
+<div class="panel panel-default" ng-init="getExpositor()">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{expositor.title}}</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-4">
+        <img src="{{expositor.image_url}}">
+      </div>
+      <div class="col-md-8">
+        </p>{{expositor.description}}</p>
+        <ul class="list-group">
+          <li class="list-group-item">Genre: {{expositor.genre}}</li>
+          <li class="list-group-item">Author: {{expositor.author}}</li>
+          <li class="list-group-item">Publisher: {{expositor.publisher}}</li>
+          <li class="list-group-item">Pages: {{expositor.pages}}</li>
+          <li class="list-group-item">Extra: {{expositor.extra}}</li>
+        </ul>
+        <a target="_blank" href="{{expositor.buy_url}}" class="btn btn-primary">Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pull-right">
+  <a href="#/expositores/edit/{{expositor._id}}">Edit</a> |  <a href="#" ng-click="removeExpositor(expositor._id)">Delete</a>
+  </div>
